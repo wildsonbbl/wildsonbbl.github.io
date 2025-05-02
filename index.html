@@ -3,99 +3,1664 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="GNNePCSAFT webapp." />
-    <meta name="keywords" content="HTML, CSS, GNNePCSAFT" />
-    <meta name="author" content="Wildson B B Lima" />
-    <title>GNNePCSAFT</title>
+    <title>Wildson B B Lima | Chemical Engineer & Python Developer</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
+      :root {
+        --primary-color: #2c3e50;
+        --secondary-color: #3498db;
+        --accent-color: #e74c3c;
+        --light-bg: #f8f9fa;
+        --dark-bg: #1a1a2e;
+        --light-text: #f8f9fa;
+        --dark-text: #333;
+        --border-radius: 8px;
+        --transition: all 0.3s ease;
+        --font-main: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      [data-theme="light"] {
+        --bg-color: var(--light-bg);
+        --text-color: var(--dark-text);
+        --card-bg: white;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      [data-theme="dark"] {
+        --bg-color: var(--dark-bg);
+        --text-color: var(--light-text);
+        --card-bg: #2c3e50;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+      }
+
+      * {
         margin: 0;
         padding: 0;
-        background-color: #f0f0f0;
-        color: #333;
+        box-sizing: border-box;
       }
+
+      body {
+        font-family: var(--font-main);
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        transition: var(--transition);
+        padding-top: 60px;
+      }
+
+      .theme-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        background: var(--card-bg);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+      }
+
+      .theme-toggle:hover {
+        transform: scale(1.1);
+      }
+
       .container {
-        max-width: 800px;
-        margin: 50px auto;
-        padding: 20px;
-        background-color: #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
       }
+
+      header {
+        text-align: center;
+        padding: 40px 0;
+        position: relative;
+      }
+
+      .profile-container {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 20px;
+      }
+
+      .profile-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid var(--secondary-color);
+        background-color: var(--secondary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 3rem;
+        font-weight: bold;
+      }
+
+      .profile-circle {
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        border: 2px dashed var(--secondary-color);
+        top: -15px;
+        left: -15px;
+        animation: rotate 30s linear infinite;
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
       h1 {
-        text-align: center;
+        font-size: 3rem;
+        margin-bottom: 10px;
+        color: var(--secondary-color);
       }
-      .download-button {
-        display: block;
-        width: 200px;
-        margin: 20px auto;
-        padding: 10px;
-        text-align: center;
-        background-color: #007bff;
+
+      .tagline {
+        font-size: 1.3rem;
+        color: var(--accent-color);
+        margin-bottom: 30px;
+      }
+
+      nav {
+        background-color: var(--primary-color);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      nav ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+      }
+
+      nav ul li {
+        padding: 20px 0;
+      }
+
+      nav ul li a {
         color: white;
         text-decoration: none;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
+        padding: 10px 20px;
+        border-radius: var(--border-radius);
+        transition: var(--transition);
       }
-      .download-button:hover {
-        background-color: #0056b3;
+
+      nav ul li a:hover,
+      nav ul li a.active {
+        background-color: var(--secondary-color);
       }
-      code {
-        background-color: #f7f7f7;
-        padding: 2px 4px;
-        font-family: monospace;
-        border-radius: 3px;
+
+      section {
+        padding: 60px 0;
+        scroll-margin-top: 60px;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        text-align: center;
+        position: relative;
+        color: var(--secondary-color);
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background-color: var(--accent-color);
+        border-radius: 2px;
+      }
+
+      .card {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .summary-text {
+        font-size: 1.1rem;
+        text-align: justify;
+        margin-bottom: 20px;
+      }
+
+      .skills-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .skill-category {
+        margin-bottom: 30px;
+      }
+
+      .skill-category h3 {
+        color: var(--secondary-color);
+        margin-bottom: 10px;
+        font-size: 1.3rem;
+      }
+
+      .skill-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .skill-item::before {
+        content: "•";
+        color: var(--accent-color);
+        font-weight: bold;
+        margin-right: 8px;
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .project-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .project-card h3 {
+        color: var(--secondary-color);
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+      }
+
+      .project-card p {
+        flex-grow: 1;
+        margin-bottom: 15px;
+      }
+
+      .project-links {
+        margin-top: auto;
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: var(--secondary-color);
+        color: white;
+        padding: 8px 16px;
+        border-radius: var(--border-radius);
+        text-decoration: none;
+        transition: var(--transition);
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+
+      .btn:hover {
+        background-color: var(--primary-color);
+        transform: translateY(-2px);
+      }
+
+      .publications-list {
+        list-style: none;
+      }
+
+      .publication-item {
+        margin-bottom: 25px;
+        padding-bottom: 25px;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+      }
+
+      .publication-item:last-child {
+        border-bottom: none;
+      }
+
+      .publication-title {
+        font-weight: bold;
+        color: var(--secondary-color);
+        margin-bottom: 8px;
+      }
+
+      .publication-source {
+        font-style: italic;
+        margin-bottom: 8px;
+      }
+
+      .publication-year {
+        display: inline-block;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 3px 10px;
+        border-radius: var(--border-radius);
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 40px;
+      }
+
+      .social-links a {
+        display: flex;
+        align-items: center;
+        margin: 0 15px 15px;
+        color: var(--text-color);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .social-links a:hover {
+        color: var(--secondary-color);
+        transform: translateY(-3px);
+      }
+
+      .social-links a span {
+        margin-left: 8px;
+      }
+
+      .social-icon {
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
+      }
+
+      .contact-form {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: var(--border-radius);
+        border: 1px solid #ddd;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+      }
+
+      .form-group textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      .submit-btn {
+        background-color: var(--accent-color);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        font-size: 1rem;
+        transition: var(--transition);
+      }
+
+      .submit-btn:hover {
+        background-color: var(--secondary-color);
+        transform: translateY(-3px);
+      }
+
+      footer {
+        background-color: var(--primary-color);
+        color: white;
+        text-align: center;
+        padding: 30px 0;
+        margin-top: 60px;
+      }
+
+      .backtotop {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--secondary-color);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .backtotop.visible {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .backtotop:hover {
+        background-color: var(--accent-color);
+        transform: translateY(-3px);
+      }
+
+      /* Responsive styles */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        .tagline {
+          font-size: 1.1rem;
+        }
+
+        nav ul {
+          flex-wrap: wrap;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .skills-container {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Custom animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate {
+        animation: fadeIn 0.8s ease forwards;
+        opacity: 0;
+      }
+
+      .delay-1 {
+        animation-delay: 0.2s;
+      }
+
+      .delay-2 {
+        animation-delay: 0.4s;
+      }
+
+      .delay-3 {
+        animation-delay: 0.6s;
+      }
+
+      .geometric-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.05;
+        pointer-events: none;
+        background-image: linear-gradient(
+            30deg,
+            var(--secondary-color) 12%,
+            transparent 12.5%,
+            transparent 87%,
+            var(--secondary-color) 87.5%,
+            var(--secondary-color)
+          ),
+          linear-gradient(
+            150deg,
+            var(--secondary-color) 12%,
+            transparent 12.5%,
+            transparent 87%,
+            var(--secondary-color) 87.5%,
+            var(--secondary-color)
+          ),
+          linear-gradient(
+            30deg,
+            var(--secondary-color) 12%,
+            transparent 12.5%,
+            transparent 87%,
+            var(--secondary-color) 87.5%,
+            var(--secondary-color)
+          ),
+          linear-gradient(
+            150deg,
+            var(--secondary-color) 12%,
+            transparent 12.5%,
+            transparent 87%,
+            var(--secondary-color) 87.5%,
+            var(--secondary-color)
+          ),
+          linear-gradient(
+            60deg,
+            var(--accent-color) 25%,
+            transparent 25.5%,
+            transparent 75%,
+            var(--accent-color) 75%,
+            var(--accent-color)
+          ),
+          linear-gradient(
+            60deg,
+            var(--accent-color) 25%,
+            transparent 25.5%,
+            transparent 75%,
+            var(--accent-color) 75%,
+            var(--accent-color)
+          );
+        background-size: 80px 140px;
+        background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+      }
+
+      /* MoleculeGraph Animation */
+      .molecule-container {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 100px;
+        height: 100px;
+        opacity: 0.7;
+        z-index: -1;
+      }
+
+      .molecule {
+        width: 100%;
+        height: 100%;
+      }
+
+      .atom {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        background-color: var(--accent-color);
+        border-radius: 50%;
+      }
+
+      .bond {
+        position: absolute;
+        height: 2px;
+        background-color: var(--secondary-color);
+        transform-origin: left center;
+      }
+
+      .timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px 0;
+      }
+
+      .timeline::after {
+        content: "";
+        position: absolute;
+        width: 4px;
+        background-color: var(--secondary-color);
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -2px;
+      }
+
+      .timeline-item {
+        padding: 20px 40px;
+        position: relative;
+        width: 50%;
+        box-sizing: border-box;
+      }
+
+      .timeline-item::after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: var(--accent-color);
+        border-radius: 50%;
+        top: 20px;
+        right: -10px;
+        z-index: 1;
+      }
+
+      .timeline-item.left {
+        left: 0;
+      }
+
+      .timeline-item.right {
+        left: 50%;
+      }
+
+      .timeline-item.right::after {
+        left: -10px;
+      }
+
+      .timeline-content {
+        padding: 20px;
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+      }
+
+      .timeline-year {
+        font-weight: bold;
+        color: var(--accent-color);
+        margin-bottom: 10px;
+      }
+
+      .quote-section {
+        background-color: rgba(52, 152, 219, 0.1);
+        border-radius: var(--border-radius);
+        padding: 40px 20px;
+        margin: 40px 0;
+        text-align: center;
+        position: relative;
+      }
+
+      .quote-section::before,
+      .quote-section::after {
+        content: '"';
+        font-size: 6rem;
+        position: absolute;
+        color: rgba(52, 152, 219, 0.2);
+        font-family: Georgia, serif;
+      }
+
+      .quote-section::before {
+        top: -20px;
+        left: 20px;
+      }
+
+      .quote-section::after {
+        bottom: -80px;
+        right: 20px;
+      }
+
+      .quote-text {
+        font-size: 1.3rem;
+        line-height: 1.8;
+        margin-bottom: 20px;
+        font-style: italic;
+      }
+
+      .stat-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin: 40px 0;
+      }
+
+      .stat-item {
+        text-align: center;
+        padding: 20px;
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .stat-number {
+        font-size: 3rem;
+        font-weight: bold;
+        color: var(--secondary-color);
+        margin-bottom: 10px;
+      }
+
+      .stat-label {
+        font-size: 1.1rem;
+        color: var(--accent-color);
+      }
+
+      .featured-project {
+        background-color: rgba(231, 76, 60, 0.1);
+        border-radius: var(--border-radius);
+        padding: 40px;
+        margin: 40px 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 30px;
+      }
+
+      .featured-project-image {
+        flex: 1;
+        min-width: 300px;
+        background-color: var(--card-bg);
+        height: 250px;
+        border-radius: var(--border-radius);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        color: var(--secondary-color);
+      }
+
+      .featured-project-content {
+        flex: 2;
+        min-width: 300px;
+      }
+
+      .featured-project-title {
+        font-size: 2rem;
+        color: var(--secondary-color);
+        margin-bottom: 15px;
+      }
+
+      .featured-project-desc {
+        margin-bottom: 20px;
+      }
+
+      .technology-badge {
+        display: inline-block;
+        background-color: var(--card-bg);
+        padding: 5px 10px;
+        border-radius: 20px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+        box-shadow: var(--shadow);
+      }
+
+      .testimonial-section {
+        padding: 60px 0;
+      }
+
+      .testimonial-card {
+        position: relative;
+        padding: 40px;
+      }
+
+      .testimonial-quote {
+        font-style: italic;
+        margin-bottom: 20px;
+        position: relative;
+        padding-left: 30px;
+      }
+
+      .testimonial-quote::before {
+        content: '"';
+        font-size: 4rem;
+        position: absolute;
+        left: -20px;
+        top: -20px;
+        color: rgba(52, 152, 219, 0.2);
+        font-family: Georgia, serif;
+      }
+
+      .testimonial-author {
+        font-weight: bold;
+        color: var(--secondary-color);
+      }
+
+      .testimonial-role {
+        color: var(--accent-color);
+        font-size: 0.9rem;
+      }
+
+      .skill-bar-container {
+        width: 100%;
+        height: 8px;
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        margin-bottom: 15px;
+        overflow: hidden;
+      }
+
+      .skill-bar {
+        height: 100%;
+        background-color: var(--secondary-color);
+        border-radius: 4px;
+        width: 0;
+        transition: width 1s ease;
+      }
+
+      .education-list {
+        list-style: none;
+      }
+
+      .education-item {
+        margin-bottom: 25px;
+        padding-bottom: 25px;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+        position: relative;
+      }
+
+      .education-item:last-child {
+        border-bottom: none;
+      }
+
+      .education-item::before {
+        content: "🎓";
+        position: absolute;
+        left: -30px;
+        top: 0;
+      }
+
+      .education-degree {
+        font-weight: bold;
+        color: var(--secondary-color);
+        margin-bottom: 8px;
+      }
+
+      .education-institution {
+        font-style: italic;
+        margin-bottom: 8px;
+      }
+
+      .education-year {
+        display: inline-block;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 3px 10px;
+        border-radius: var(--border-radius);
+        font-size: 0.9rem;
+        margin-bottom: 10px;
       }
     </style>
   </head>
-  <body>
-    <div class="container">
-      <h1>GNNePCSAFT</h1>
-      <p>
-        This app uses a
-        <a
-          href="https://github.com/wildsonbbl/gnnepcsaft"
-          target="_blank"
-          rel="noopener"
-          >GNNePCSAFT model</a
-        >
-        to estimate
-        <abbr
-          title="electrolyte Perturbed Chain Statistical Associating Fluid Theory"
-          >ePC-SAFT</abbr
-        >
-        parameters. Parameters can be used with
-        <a
-          href="https://github.com/feos-org/feos"
-          target="_blank"
-          rel="noopener"
-          >FEOS package</a
-        >,
-        <a
-          class="text-decoration-none"
-          href="https://dwsim.org/"
-          target="_blank"
-          rel="noopener"
-          >DWSIM</a
-        >
-        or any other implementation of the
-        <abbr title="Equation of State">EoS</abbr>.
-      </p>
-      <p>
-        Web App is offline for now, considerer downloading the Desktop App
-        (Windows, Mac, Linux).
-      </p>
-      <p>
-        Follow the link bellow to SourceForge and install the app. More info
-        about the project at
-        <a href="https://github.com/wildsonbbl/gnnepcsaft">github repo</a>.
-      </p>
-      <a
-        href="https://sourceforge.net/projects/gnnepcsaft/"
-        class="download-button"
-        >Download Now</a
+  <body data-theme="light">
+    <div class="geometric-bg"></div>
+
+    <!-- Theme toggle button -->
+    <button class="theme-toggle" aria-label="Toggle dark/light mode">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="moon"
       >
-    </div>
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="sun"
+        style="display: none"
+      >
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+    </button>
+
+    <!-- Navigation -->
+    <nav>
+      <ul>
+        <li><a href="#about" class="active">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Header -->
+    <header>
+      <div class="molecule-container">
+        <div class="molecule" id="moleculeAnimation"></div>
+      </div>
+      <div class="profile-container">
+        <div class="profile-circle"></div>
+        <div class="profile-img">WL</div>
+      </div>
+      <h1>Wildson B B Lima</h1>
+      <p class="tagline">
+        Chemical Engineer | Python Developer | Machine Learning Enthusiast
+      </p>
+
+      <div class="social-links">
+        <a href="https://github.com/wildsonbbl" target="_blank">
+          <svg
+            class="social-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+            />
+          </svg>
+          <span>GitHub</span>
+        </a>
+        <a href="https://www.linkedin.com/in/wildsonbbl/" target="_blank">
+          <svg
+            class="social-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"
+            />
+          </svg>
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://www.freelancer.com/u/wildsonbbl" target="_blank">
+          <svg
+            class="social-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M13.162 12.986c.11-.248.159-.537.159-.817 0-.544-.105-1.305-.879-1.305-.719 0-.82.855-.82 1.424 0 .854.323 1.418.809 1.418.424 0 .653-.299.731-.72zm-2.896-8.224l.611 6.791-.96-.262-.295-6.529h.644zm11.734 3.326v12.912h-20v-13h4.092v2.514h11.804v-2.426h4.104zm-3.991.124h-7.427c.161.771.206 1.577.182 2.166-.364-.031-.7-.043-1.003-.043-1.14 0-2.018.451-2.541 1.23-.423-.052-.941-.083-1.44-.073.011-.499-.004-1.416.137-2.271.093-.558.222-1.009.396-1.341h-3.309v11.331h3.826v-4.826c0-.161-.155-.295-.345-.295h-.345v-1.013h.263c1.055 0 1.872.909 1.872 2.076v4.058h3.758v-4.995c.303.514.919.804 1.781.804 1.6 0 2.758-1.76 2.758-4.012 0-1.396-.28-2.215-.717-2.826l2.154.04zm.174 2.708c-.844 0-1.513.669-1.513 1.497 0 .828.669 1.515 1.513 1.515.829 0 1.498-.687 1.498-1.515 0-.828-.669-1.497-1.498-1.497z"
+            />
+          </svg>
+          <span>Freelancer</span>
+        </a>
+        <a
+          href="https://www.researchgate.net/profile/Wildson-Lima"
+          target="_blank"
+        >
+          <svg
+            class="social-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19.586 0c-2.65 0-4.815 2.16-4.815 4.815s2.17 4.815 4.82 4.815c2.65 0 4.82-2.17 4.82-4.82s-2.17-4.815-4.82-4.815h-.005zm2.17 7.615c-.47.47-1.125.765-1.805.77h-.13c-1.405 0-2.55-1.145-2.55-2.55 0-1.41 1.145-2.555 2.555-2.555 1.41 0 2.555 1.145 2.555 2.555 0 .66-.255 1.31-.625 1.78zm-8.955 2.724h-2.93v9.81c1.05-.076 1.69-.083 2.93-.083v-9.73zm-1.434-4.919c-1 0-1.815.815-1.815 1.815 0 1 .815 1.815 1.815 1.815 1 0 1.815-.82 1.815-1.82s-.82-1.81-1.82-1.81zm-6.243 2.04h-2.93v12.67c1.05-.08 1.69-.09 2.93-.09v-12.58z"
+            />
+          </svg>
+          <span>ResearchGate</span>
+        </a>
+        <a href="https://orcid.org/0000-0002-0189-6000" target="_blank">
+          <svg
+            class="social-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.033 16.01h-2.039v-4.002c0-.822-.01-1.647-1.02-1.647-1.021 0-1.186 1.22-.918 1.661h-.003v3.988h-2.039v-8.017h1.962v.917h.026c.379-.674 1.258-1.108 2.019-1.108 2.161 0 2.556 1.249 2.556 3.678v4.53zm1.403-10.01c0 .688-.558 1.242-1.244 1.242-.686.001-1.244-.553-1.244-1.242s.558-1.242 1.244-1.242c.686 0 1.244.553 1.244 1.242zm-1.244 2.013h2.039v8.017h-2.039z"
+            />
+          </svg>
+          <span>ORCID</span>
+        </a>
+        <a href="mailto:wildsonbbl@gmail.com">
+          <svg
+            class="social-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"
+            />
+          </svg>
+          <span>Email</span>
+        </a>
+      </div>
+    </header>
+    <!-- MAIN CONTENT SECTIONS -->
+
+    <!-- About Section -->
+    <section id="about" class="container">
+      <h2 class="section-title animate">About Me</h2>
+      <div class="card animate delay-1">
+        <p class="summary-text">
+          I stand at the intersection of scientific rigor and technological
+          innovation. As a Chemical Engineer with a Master of Science degree, I
+          possess a strong foundation in the principles of chemical processes
+          and thermodynamics. My expertise extends significantly into the domain
+          of software development, particularly with the Python programming
+          language, positioning me as a versatile professional capable of
+          tackling complex challenges through both theoretical understanding and
+          practical application.
+        </p>
+        <p class="summary-text">
+          My academic journey and professional endeavors highlight a commitment
+          to leveraging computational tools to advance scientific research and
+          practical solutions. I focus on bridging the gap between scientific
+          research and practical application, translating theoretical concepts
+          into tangible outcomes.
+        </p>
+
+        <div class="quote-section animate delay-2">
+          <p class="quote-text">
+            "The most exciting phrase to hear in science, the one that heralds
+            new discoveries, is not 'Eureka!' but 'That's funny...'"
+          </p>
+          <p>- Isaac Asimov</p>
+        </div>
+
+        <div class="stat-container animate delay-3">
+          <div class="stat-item">
+            <div class="stat-number">5+</div>
+            <div class="stat-label">Research Publications</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">7+</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">Open Source Projects</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="container">
+      <h2 class="section-title animate">Technical Skills</h2>
+      <div class="skills-container animate delay-1">
+        <div class="card skill-category">
+          <h3>Programming Languages</h3>
+          <div class="skill-item">Python (PyTorch, Jax, Keras, Django)</div>
+          <div class="skill-item">
+            R for data analysis and statistical computing
+          </div>
+          <div class="skill-item">JavaScript for front-end web development</div>
+          <div class="skill-item">Bootstrap, HTML5, and CSS</div>
+
+          <h3 class="mt-4">Python Skills</h3>
+          <div class="skill-item">
+            <span>PyTorch</span>
+            <div class="skill-bar-container">
+              <div class="skill-bar" style="width: 95%"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <span>Django</span>
+            <div class="skill-bar-container">
+              <div class="skill-bar" style="width: 90%"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <span>Data Analysis</span>
+            <div class="skill-bar-container">
+              <div class="skill-bar" style="width: 92%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card skill-category">
+          <h3>Frameworks & Libraries</h3>
+          <div class="skill-item">
+            Electron for cross-platform desktop application
+          </div>
+          <div class="skill-item">ONNX Runtime for optimizing ML models</div>
+          <div class="skill-item">
+            PyTorch Geometric for graph neural networks
+          </div>
+          <div class="skill-item">Ray for hyperparameter tuning</div>
+          <div class="skill-item">
+            Weights & Biases (Wandb) for experiment tracking
+          </div>
+        </div>
+
+        <div class="card skill-category">
+          <h3>Cloud & Deployment</h3>
+          <div class="skill-item">Azure, GCP, and AWS</div>
+          <div class="skill-item">Docker and Kubernetes</div>
+          <div class="skill-item">MLOps workflows</div>
+          <div class="skill-item">CI/CD practices</div>
+        </div>
+
+        <div class="card skill-category">
+          <h3>Machine Learning</h3>
+          <div class="skill-item">
+            Modeling with scientific research-based methods
+          </div>
+          <div class="skill-item">
+            Implementing Large Language Models (LLMs)
+          </div>
+          <div class="skill-item">Graph Neural Networks</div>
+          <div class="skill-item">Hyperparameter optimization</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="container">
+      <h2 class="section-title animate">Featured Projects</h2>
+
+      <div class="featured-project animate delay-1">
+        <div class="featured-project-image">GNN</div>
+        <div class="featured-project-content">
+          <h3 class="featured-project-title">GNNePCSAFT</h3>
+          <p class="featured-project-desc">
+            Innovative application of Graph Neural Networks (GNNs) to estimate
+            the pure-component parameters of the ePC-SAFT equation of state.
+            This project addresses a fundamental challenge in thermodynamic
+            modeling by enabling the use of this robust equation without the
+            traditional reliance on prior experimental data.
+          </p>
+          <div>
+            <span class="technology-badge">PyTorch</span>
+            <span class="technology-badge">GNN</span>
+            <span class="technology-badge">Thermodynamics</span>
+            <span class="technology-badge">Python</span>
+          </div>
+          <div class="project-links mt-3">
+            <a
+              href="https://github.com/wildsonbbl/gnnepcsaft"
+              class="btn"
+              target="_blank"
+              >GitHub</a
+            >
+            <a
+              href="https://sourceforge.net/projects/gnnepcsaft/"
+              class="btn"
+              target="_blank"
+              >SourceForge</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="projects-grid animate delay-2">
+        <div class="card project-card">
+          <h3>GNNEPCSAFT MCP Server</h3>
+          <p>
+            Implementation of the Model Context Protocol (MCP) specifically for
+            GNNePCSAFT tools. This server manages communication and context
+            between models and clients using the standardized MCP protocol,
+            facilitating integration with AI systems.
+          </p>
+          <div class="project-links">
+            <a
+              href="https://github.com/wildsonbbl/gnnepcsaft_mcp_server"
+              class="btn"
+              target="_blank"
+              >GitHub</a
+            >
+          </div>
+        </div>
+
+        <div class="card project-card">
+          <h3>GNNePCSAFT Web App</h3>
+          <p>
+            A web application that provides an intuitive interface for using the
+            GNNePCSAFT model to predict thermodynamic properties. Built with
+            Django and deployed as a Docker container for easy access.
+          </p>
+          <div class="project-links">
+            <a
+              href="https://hub.docker.com/r/wildsonbbl/gnnepcsaft"
+              class="btn"
+              target="_blank"
+              >Docker Hub</a
+            >
+          </div>
+        </div>
+
+        <div class="card project-card">
+          <h3>GNNePCSAFT CLI</h3>
+          <p>
+            A command-line interface for the GNNePCSAFT model, allowing users to
+            integrate the model into their workflows and scripts efficiently.
+            Easily installable using pipx.
+          </p>
+          <div class="project-links">
+            <a
+              href="https://github.com/wildsonbbl/gnnepcsaftcli"
+              class="btn"
+              target="_blank"
+              >GitHub</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="container">
+      <h2 class="section-title animate">Education</h2>
+      <div class="card animate delay-1">
+        <ul class="education-list">
+          <li class="education-item">
+            <div class="education-degree">
+              Ph.D. Candidate in Chemical Engineering
+            </div>
+            <div class="education-institution">
+              Federal University of Rio Grande do Norte
+            </div>
+            <div class="education-year">2024 - Present</div>
+            <p>
+              Developing innovative membranes for carbon capture as part of
+              doctoral research within the Chemical Engineering Department.
+            </p>
+          </li>
+          <li class="education-item">
+            <div class="education-degree">
+              Master of Science in Chemical Engineering
+            </div>
+            <div class="education-institution">
+              Federal University of Rio Grande do Norte
+            </div>
+            <div class="education-year">2021 - 2023</div>
+            <p>
+              Focusing on applying machine learning techniques to thermodynamic
+              modeling and chemical process optimization.
+            </p>
+          </li>
+          <li class="education-item">
+            <div class="education-degree">
+              Bachelor's Degree in Chemical Engineering
+            </div>
+            <div class="education-institution">
+              Federal University of Rio Grande do Norte
+            </div>
+            <div class="education-year">2015 - 2021</div>
+            <p>
+              Foundation in chemical processes, thermodynamics, and process
+              modeling. Research on bioprocess engineering and enzyme
+              technology.
+            </p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications" class="container">
+      <h2 class="section-title animate">Publications</h2>
+      <div class="card animate delay-1">
+        <ul class="publications-list">
+          <li class="publication-item">
+            <div class="publication-title">
+              Effect of enzymatic hydrolysis on digestibility and
+              morpho-structural properties of hydrothermally pre-treated red
+              rice starch
+            </div>
+            <div class="publication-source">
+              International Journal of Biological Macromolecules
+            </div>
+            <div class="publication-year">2022</div>
+            <p>
+              This study evaluated the impact of enzymatic hydrolysis on the
+              properties of red rice starch, providing insights into the
+              structural changes and digestibility.
+            </p>
+          </li>
+          <li class="publication-item">
+            <div class="publication-title">
+              Recovery of β-galactosidase produced by Kluyveromyces lactis by
+              ion-exchange chromatography: Influence of pH and ionic strength
+              parameters
+            </div>
+            <div class="publication-source">
+              Anais da Academia Brasileira de Ciências
+            </div>
+            <div class="publication-year">2022</div>
+            <p>
+              This research optimized the recovery of an important enzyme using
+              chromatographic techniques, demonstrating efficient purification
+              methods.
+            </p>
+          </li>
+          <li class="publication-item">
+            <div class="publication-title">
+              Chapter 11 - Use of Deep Eutectic Solvents (DES)-Based Aqueous
+              Two-Phase System for Recovery and Partial Purification of
+              β-galactosidase Produced by Kluyveromyces lactis
+            </div>
+            <div class="publication-source">Nova Science Publishers</div>
+            <div class="publication-year">2022</div>
+            <p>
+              This book chapter presents an innovative approach using Deep
+              Eutectic Solvents (DES)-based aqueous two-phase systems for enzyme
+              recovery and purification, offering a greener and more efficient
+              alternative to conventional bioproduct separation methods.
+            </p>
+          </li>
+          <li class="publication-item">
+            <div class="publication-title">
+              Lactose hydrolysis using β-galactosidase from Kluyveromyces lactis
+              immobilized with sodium alginate for potential industrial
+              applications
+            </div>
+            <div class="publication-source">
+              Preparative Biochemistry & Biotechnology
+            </div>
+            <div class="publication-year">2021</div>
+            <p>
+              This work explored the use of an immobilized enzyme for lactose
+              hydrolysis, a process with significant industrial relevance,
+              particularly in dairy processing.
+            </p>
+          </li>
+          <li class="publication-item">
+            <div class="publication-title">
+              Potential of "coalho" cheese whey as lactose source for
+              β-galactosidase and ethanol co-production by Kluyveromyces spp.
+              yeasts
+            </div>
+            <div class="publication-source">
+              Preparative Biochemistry & Biotechnology
+            </div>
+            <div class="publication-year">2020</div>
+            <p>
+              This investigation demonstrated the potential of using a dairy
+              byproduct for the co-production of valuable biochemicals,
+              contributing to sustainable bioprocessing.
+            </p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Para a seção de contato -->
+    <section id="contact" class="container">
+      <h2 class="section-title animate">Get In Touch</h2>
+      <div class="card animate delay-1">
+        <div class="social-links">
+          <a href="mailto:wildsonbbl@gmail.com">
+            <svg
+              class="social-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"
+              />
+            </svg>
+            <span>Email</span>
+          </a>
+          <a href="https://www.linkedin.com/in/wildsonbbl/" target="_blank">
+            <svg
+              class="social-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"
+              />
+            </svg>
+            <span>LinkedIn</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Para o rodapé -->
+    <footer>
+      <p>&copy; 2025 Wildson B B Lima. All Rights Reserved.</p>
+      <div class="social-links">
+        <a href="https://github.com/wildsonbbl" target="_blank">
+          <svg
+            class="social-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+            />
+          </svg>
+          <span>GitHub</span>
+        </a>
+        <a href="https://www.linkedin.com/in/wildsonbbl/" target="_blank">
+          <svg
+            class="social-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"
+            />
+          </svg>
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://www.freelancer.com/u/wildsonbbl" target="_blank">
+          <svg
+            class="social-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M13.162 12.986c.11-.248.159-.537.159-.817 0-.544-.105-1.305-.879-1.305-.719 0-.82.855-.82 1.424 0 .854.323 1.418.809 1.418.424 0 .653-.299.731-.72zm-2.896-8.224l.611 6.791-.96-.262-.295-6.529h.644zm11.734 3.326v12.912h-20v-13h4.092v2.514h11.804v-2.426h4.104zm-3.991.124h-7.427c.161.771.206 1.577.182 2.166-.364-.031-.7-.043-1.003-.043-1.14 0-2.018.451-2.541 1.23-.423-.052-.941-.083-1.44-.073.011-.499-.004-1.416.137-2.271.093-.558.222-1.009.396-1.341h-3.309v11.331h3.826v-4.826c0-.161-.155-.295-.345-.295h-.345v-1.013h.263c1.055 0 1.872.909 1.872 2.076v4.058h3.758v-4.995c.303.514.919.804 1.781.804 1.6 0 2.758-1.76 2.758-4.012 0-1.396-.28-2.215-.717-2.826l2.154.04zm.174 2.708c-.844 0-1.513.669-1.513 1.497 0 .828.669 1.515 1.513 1.515.829 0 1.498-.687 1.498-1.515 0-.828-.669-1.497-1.498-1.497z"
+            />
+          </svg>
+          <span>Freelancer</span>
+        </a>
+        <a
+          href="https://www.researchgate.net/profile/Wildson-Lima"
+          target="_blank"
+        >
+          <svg
+            class="social-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19.586 0c-2.65 0-4.815 2.16-4.815 4.815s2.17 4.815 4.82 4.815c2.65 0 4.82-2.17 4.82-4.82s-2.17-4.815-4.82-4.815h-.005zm2.17 7.615c-.47.47-1.125.765-1.805.77h-.13c-1.405 0-2.55-1.145-2.55-2.55 0-1.41 1.145-2.555 2.555-2.555 1.41 0 2.555 1.145 2.555 2.555 0 .66-.255 1.31-.625 1.78zm-8.955 2.724h-2.93v9.81c1.05-.076 1.69-.083 2.93-.083v-9.73zm-1.434-4.919c-1 0-1.815.815-1.815 1.815 0 1 .815 1.815 1.815 1.815 1 0 1.815-.82 1.815-1.82s-.82-1.81-1.82-1.81zm-6.243 2.04h-2.93v12.67c1.05-.08 1.69-.09 2.93-.09v-12.58z"
+            />
+          </svg>
+          <span>ResearchGate</span>
+        </a>
+        <a href="https://orcid.org/0000-0002-0189-6000" target="_blank">
+          <svg
+            class="social-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.033 16.01h-2.039v-4.002c0-.822-.01-1.647-1.02-1.647-1.021 0-1.186 1.22-.918 1.661h-.003v3.988h-2.039v-8.017h1.962v.917h.026c.379-.674 1.258-1.108 2.019-1.108 2.161 0 2.556 1.249 2.556 3.678v4.53zm1.403-10.01c0 .688-.558 1.242-1.244 1.242-.686.001-1.244-.553-1.244-1.242s.558-1.242 1.244-1.242c.686 0 1.244.553 1.244 1.242zm-1.244 2.013h2.039v8.017h-2.039z"
+            />
+          </svg>
+          <span>ORCID</span>
+        </a>
+        <a href="mailto:wildsonbbl@gmail.com">
+          <svg
+            class="social-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"
+            />
+          </svg>
+          <span>Email</span>
+        </a>
+      </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#" class="backtotop" id="backToTop" aria-label="Back to top">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="12" y1="19" x2="12" y2="5"></line>
+        <polyline points="5 12 12 5 19 12"></polyline>
+      </svg>
+    </a>
+
+    <!-- JavaScript -->
+    <script>
+      // Theme toggle
+      const themeToggle = document.querySelector(".theme-toggle");
+      const moonIcon = document.querySelector(".moon");
+      const sunIcon = document.querySelector(".sun");
+
+      // Check for saved theme preference or use preferred color scheme
+      const savedTheme =
+        localStorage.getItem("theme") ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light");
+      document.body.setAttribute("data-theme", savedTheme);
+
+      if (savedTheme === "dark") {
+        moonIcon.style.display = "none";
+        sunIcon.style.display = "block";
+      }
+
+      themeToggle.addEventListener("click", () => {
+        const currentTheme = document.body.getAttribute("data-theme");
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+
+        document.body.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+
+        if (newTheme === "dark") {
+          moonIcon.style.display = "none";
+          sunIcon.style.display = "block";
+        } else {
+          moonIcon.style.display = "block";
+          sunIcon.style.display = "none";
+        }
+      });
+
+      // Animate elements when they enter viewport
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".animate").forEach((element) => {
+        observer.observe(element);
+      });
+
+      // Back to top button
+      const backToTopButton = document.getElementById("backToTop");
+
+      window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add("visible");
+        } else {
+          backToTopButton.classList.remove("visible");
+        }
+      });
+
+      backToTopButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // Initialize skill bars with animation
+      function initSkillBars() {
+        const skillBars = document.querySelectorAll(".skill-bar");
+        skillBars.forEach((bar) => {
+          const width = bar.style.width;
+          bar.style.width = "0";
+          setTimeout(() => {
+            bar.style.width = width;
+          }, 300);
+        });
+      }
+
+      // Nav active state
+      const sections = document.querySelectorAll("section");
+      const navLinks = document.querySelectorAll("nav ul li a");
+
+      window.addEventListener("scroll", () => {
+        let current = "";
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+
+          if (window.pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href").substring(1) === current) {
+            link.classList.add("active");
+          }
+        });
+      });
+
+      // Molecule animation
+      function createMoleculeAnimation() {
+        const moleculeContainer = document.getElementById("moleculeAnimation");
+
+        // Create atoms
+        const atomPositions = [
+          { x: 50, y: 20 },
+          { x: 20, y: 50 },
+          { x: 80, y: 50 },
+          { x: 50, y: 80 },
+        ];
+
+        atomPositions.forEach((pos, index) => {
+          const atom = document.createElement("div");
+          atom.className = "atom";
+          atom.style.left = `${pos.x}px`;
+          atom.style.top = `${pos.y}px`;
+          moleculeContainer.appendChild(atom);
+
+          // Animate atoms
+          setInterval(() => {
+            const xOffset = Math.sin(Date.now() / 1000 + index) * 5;
+            const yOffset = Math.cos(Date.now() / 1000 + index) * 5;
+            atom.style.left = `${pos.x + xOffset}px`;
+            atom.style.top = `${pos.y + yOffset}px`;
+          }, 50);
+        });
+
+        // Create bonds
+        for (let i = 0; i < atomPositions.length; i++) {
+          for (let j = i + 1; j < atomPositions.length; j++) {
+            const bond = document.createElement("div");
+            bond.className = "bond";
+            moleculeContainer.appendChild(bond);
+
+            // Update bond position to connect atoms
+            setInterval(() => {
+              const atom1 = document.querySelectorAll(".atom")[i];
+              const atom2 = document.querySelectorAll(".atom")[j];
+
+              const x1 = parseInt(atom1.style.left) + 6;
+              const y1 = parseInt(atom1.style.top) + 6;
+              const x2 = parseInt(atom2.style.left) + 6;
+              const y2 = parseInt(atom2.style.top) + 6;
+
+              const length = Math.sqrt(
+                Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)
+              );
+              const angle = (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI;
+
+              bond.style.width = `${length}px`;
+              bond.style.left = `${x1}px`;
+              bond.style.top = `${y1}px`;
+              bond.style.transform = `rotate(${angle}deg)`;
+            }, 50);
+          }
+        }
+      }
+
+      // Initialize everything when DOM is loaded
+      document.addEventListener("DOMContentLoaded", () => {
+        initSkillBars();
+        createMoleculeAnimation();
+
+        // Form submission
+        const contactForm = document.querySelector(".contact-form");
+        if (contactForm) {
+          contactForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            alert("Thank you for your message! I will get back to you soon.");
+            contactForm.reset();
+          });
+        }
+      });
+    </script>
   </body>
 </html>
