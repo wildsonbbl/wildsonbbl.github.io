@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -503,7 +503,8 @@
         z-index: -1;
         opacity: 0.05;
         pointer-events: none;
-        background-image: linear-gradient(
+        background-image:
+          linear-gradient(
             30deg,
             var(--secondary-color) 12%,
             transparent 12.5%,
@@ -552,7 +553,13 @@
             var(--accent-color)
           );
         background-size: 80px 140px;
-        background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+        background-position:
+          0 0,
+          0 0,
+          40px 70px,
+          40px 70px,
+          0 0,
+          40px 70px;
       }
 
       /* MoleculeGraph Animation */
@@ -1028,21 +1035,16 @@
       <h2 class="section-title animate">About Me</h2>
       <div class="card animate delay-1">
         <p class="summary-text">
-          I stand at the intersection of scientific rigor and technological
-          innovation. As a Chemical Engineer with a Master of Science degree, I
-          possess a strong foundation in the principles of chemical processes
-          and thermodynamics. My expertise extends significantly into the domain
-          of software development, particularly with the Python programming
-          language, positioning me as a versatile professional capable of
-          tackling complex challenges through both theoretical understanding and
-          practical application.
+          As a Chemical Engineer with a Master of Science degree, I possess a
+          strong foundation in the principles of chemical processes and
+          thermodynamics. My expertise extends into the domain of software
+          development, particularly with the Python programming language.
         </p>
         <p class="summary-text">
           My academic journey and professional endeavors highlight a commitment
-          to leveraging computational tools to advance scientific research and
-          practical solutions. I focus on bridging the gap between scientific
-          research and practical application, translating theoretical concepts
-          into tangible outcomes.
+          to leveraging computational tools to advance scientific research. I
+          focus on bridging the gap between scientific research and practical
+          application, translating theoretical concepts into tangible outcomes.
         </p>
 
         <div class="quote-section animate delay-2">
@@ -1063,7 +1065,7 @@
             <div class="stat-label">Years Experience</div>
           </div>
           <div class="stat-item">
-            <div class="stat-number">10+</div>
+            <div class="stat-number">5+</div>
             <div class="stat-label">Open Source Projects</div>
           </div>
         </div>
@@ -1076,40 +1078,38 @@
       <div class="skills-container animate delay-1">
         <div class="card skill-category">
           <h3>Programming Languages</h3>
-          <div class="skill-item">Python (PyTorch, Jax, Keras, Django)</div>
+          <div class="skill-item">
+            Python (PyTorch, Jax, Keras, Django, Kivy)
+          </div>
           <div class="skill-item">
             R for data analysis and statistical computing
           </div>
-          <div class="skill-item">JavaScript for front-end web development</div>
+          <div class="skill-item">JavaScript for web development</div>
           <div class="skill-item">Bootstrap, HTML5, and CSS</div>
 
           <h3 class="mt-4">Python Skills</h3>
           <div class="skill-item">
-            <span>PyTorch</span>
-            <div class="skill-bar-container">
-              <div class="skill-bar" style="width: 100%"></div>
-            </div>
+            <span>PyTorch/Machine Learning</span>
           </div>
           <div class="skill-item">
-            <span>Django</span>
-            <div class="skill-bar-container">
-              <div class="skill-bar" style="width: 90%"></div>
-            </div>
+            <span>Django/Web App</span>
+          </div>
+          <div class="skill-item">
+            <span>Kivy/App Development</span>
           </div>
           <div class="skill-item">
             <span>Data Analysis</span>
-            <div class="skill-bar-container">
-              <div class="skill-bar" style="width: 100%"></div>
-            </div>
           </div>
         </div>
 
         <div class="card skill-category">
           <h3>Frameworks & Libraries</h3>
           <div class="skill-item">
-            Electron for cross-platform desktop application
+            Electron (js)/Kivy (Python) for cross-platform desktop application
           </div>
-          <div class="skill-item">ONNX Runtime for optimizing ML models</div>
+          <div class="skill-item">
+            ONNX Runtime for optimizing ML models for production
+          </div>
           <div class="skill-item">
             PyTorch Geometric for graph neural networks
           </div>
@@ -1121,7 +1121,7 @@
 
         <div class="card skill-category">
           <h3>Cloud & Deployment</h3>
-          <div class="skill-item">Azure, GCP, and AWS</div>
+          <div class="skill-item">Azure, GCP, AWS</div>
           <div class="skill-item">Docker and Kubernetes</div>
           <div class="skill-item">MLOps workflows</div>
           <div class="skill-item">CI/CD practices</div>
@@ -1193,9 +1193,10 @@
           <h3>GNNePCSAFT MCP Server</h3>
           <p>
             Implementation of the Model Context Protocol (MCP) specifically for
-            GNNePCSAFT tools. This server manages communication and context
-            between models and clients using the standardized MCP protocol,
-            facilitating integration with AI systems.
+            GNNePCSAFT tools, such as predicting thermodynamic properties. This
+            server manages communication and context between models and clients
+            using the standardized MCP protocol, facilitating integration with
+            LLM systems.
           </p>
           <div class="project-links">
             <a
@@ -1229,9 +1230,9 @@
         <div class="card project-card">
           <h3>GNNePCSAFT CLI</h3>
           <p>
-            A command-line interface for the GNNePCSAFT model, allowing users to
-            integrate the model into their workflows and scripts efficiently.
-            Easily installable using pipx.
+            A command-line interface for the GNNePCSAFT model, developed so the
+            scientific community can access the model's results easily. Easily
+            installable using pipx.
           </p>
           <div class="project-links">
             <a
@@ -1687,7 +1688,7 @@
               const y2 = parseInt(atom2.style.top) + 6;
 
               const length = Math.sqrt(
-                Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)
+                Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2),
               );
               const angle = (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI;
 
